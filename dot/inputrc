@@ -1,0 +1,13 @@
+"\M-a":shell-backward-word
+"\M-e":shell-forward-word
+$if Bash
+    Space: magic-space
+$endif
+
+set completion-ignore-case off
+set print-completions-horizontally off
+#"\C-P": menu-complete
+#"\C-l": "\e--\C-o"
+#"\C-l": menu-complete-backward
+"\C-l": dabbrev-expand 
+#"\C-o": menu-complete

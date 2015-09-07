@@ -1,0 +1,18 @@
+#!/bin/bash
+# .bash_profile
+#
+# bash_profile and or /etc/profile, /etc/profile.d/ are only
+# normally read on "login" shells
+#
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+# requires rvm to be in PATH, that's setup in ~/.bashrc
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+[[ -r "$rvm_path/scripts/completion" ]] && . "$rvm_path/scripts/completion"
+

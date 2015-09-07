@@ -1,0 +1,157 @@
+# .bashrc
+
+# Keep Track of the shell env overtime.
+if [ -d ~/.bash_envs ]; then
+    env|sort > ~/.bash_envs/env_prerc_$$
+fi
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+
+if [ -f ~/.bash_functions ]; then
+	. ~/.bash_functions
+fi
+
+if [ -f ~/.bash_vagrant_functions ]; then
+    . ~/.bash_vagrant_functions
+fi
+
+# turn off flow control, aka ctrl-s/q
+# if in an interactive shell
+[[ $- == *i* ]] && stty -ixon
+
+# Split these up into ansible roles
+# ah, dyndns...
+HOSTNAME="$(hostname)"
+export HOSTNAME
+
+EDITOR='vim -f'
+export EDITOR
+
+# prepend ~/bin to front of path
+pre_path "${HOME}/bin"
+
+# Language/runtime specific stuff
+JAVA_HOME=/usr/lib/jvm/java
+export JAVA_HOME
+
+M2_REPO="${HOME}/.m2/repository"
+export M2_REPO
+
+GOPATH="${HOME}/gopath"
+export GOPATH
+
+LOCAL_CABAL="${HOME}/.cabal"
+
+add_path "${GOPATH}/bin"
+#rvm
+add_path "${HOME}/.rvm/bin"
+add_path "${LOCAL_CABAL}/bin/"
+
+PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
+export PKG_CONFIG_PATH
+
+VAGRANT_DEFAULT_PROVIDER=libvirt
+export VAGRANT_DEFAULT_PROVIDER
+
+# module to run when python interactive
+# mode starts up
+export PYTHONSTARTUP=~/.pystartup
+
+VIRTUALENVWRAPPER="${HOME}/bin/virtualenvwrapper.sh"
+if [ -f "${VIRTUALENVWRAPPER}" ] ; then
+    source "${VIRTUALENVWRAPPER}"
+fi
+
+# for "gist" tool
+export GITHUB_TOKEN=$(cat ~/.github-token)
+
+# make ack look for a .ackrc in pwd
+export ACKRC=.ackrc
+
+# lots of history
+export HISTTIMEFORMAT="%F %T "
+export HISTSIZE=300000
+export HISTFILESIZE=500000
+
+# append history instead of overwriting
+shopt -s histappend
+
+alias grep="grep --color=auto"
+alias nosetest="nosetests"
+alias nose="nosetests -v -d -s"
+alias eclipse-open="eclipse --launcher.openFile"
+alias tailf="tail --follow=name"
+alias gm="git checkout master"
+alias yesterday='history -n; history | grep $(date "+%F" --date="yesterday"); yesterday-git'
+
+# compare current env to that from when the shell started
+alias es='env|sort'
+alias envdiff="diff -d -u --label from_login ~/.bash_envs/env_postrc_\$\$ --label now <(es)|colordiff"
+alias envstartdiff="diff -d -u --label before_dotbashrc ~/.bash_envs/env_prerc_\$\$ --label post_dotbashrc <(es)|colordiff"
+
+# we have a better version in ~/.bash_functions
+# make this quiet
+unalias which > /dev/null 2>&1  || :
+
+# use vimx if we has a DISPLAY and it exists
+# vimx enabled X cut and paste
+if [[ -n "$DISPLAY" ]] ; then
+    if [ -e /usr/bin/vimx ] ; then
+        alias vim="/usr/bin/vimx"
+    fi
+else
+    alias vim="/usr/bin/vim"
+fi
+
+# z cd history thingamabob
+# https://github.com/rupa/z
+if [ -f ~/src/z/z.sh ]; then
+    . ~/src/z/z.sh
+fi
+
+# prompt, user@host dir
+C_NICE_ORANGE="\[\033[38;5;166m\]"
+C_RST='\[\033[m\]'
+PS1=""
+PS1+="[${C_NICE_ORANGE}\W${C_RST}"
+
+# git prompt stuff
+GIT_PROMPT="/usr/share/git-core/contrib/completion/git-prompt.sh"
+if [ -f "${GIT_PROMPT}" ] ; then
+    source "${GIT_PROMPT}"
+    # export GIT_PS1_SHOWDIRTYSTATE=1
+    # GIT_PS1_SHOWSTASHSTATE=1
+    export GIT_PS1_SHOWUNTRACKEDFILES=1
+    export GIT_PS1_SHOWUPSTREAM="auto"
+    export GIT_PS1_SHOWUPSTREAM="verbose"
+    export GIT_PS1_SHOWCOLORHINTS=1
+    PS1+='$(__git_ps1 " (%s)")]\$ '
+else
+    PS1+='" (%s)")]\$ '
+fi
+
+export PS1
+
+# save the history every prompt
+export PROMPT_COMMAND="history -a;"
+
+
+# make 256 color term stuff work
+if [ "$TERM" == "xterm" ]; then
+    # No it isn't, it's gnome-terminal
+    export TERM=xterm-256color
+fi
+
+# env snapshot after startup
+if [ -d ~/.bash_envs ]; then
+    env|sort > ~/.bash_envs/env_postrc_$$
+fi
+

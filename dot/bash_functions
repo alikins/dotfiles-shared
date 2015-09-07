@@ -1,0 +1,139 @@
+
+# User specific aliases and functions
+foreach ()
+{
+        path="$1"
+        shift
+        for i in `ls -1 -d $path`
+        do
+          $* "$i"
+        done
+
+}
+
+
+# from zeus, for finding and opening java files without the full path
+# somewhere I have this as a bash completion script as well
+findj ()
+{
+    dafiles=$(find . -type f -name "$1")
+    matches=$(echo $dafiles | gawk '{print NF}')
+
+    case "$matches" in
+        0)
+           echo "No matches found"
+           show=""
+           ;;
+        1)
+           show=$dafiles
+           ;;
+        *)
+           echo
+           echo "Multiple matches found..."
+           i=1
+           for option in $dafiles
+           do
+              echo "$i: $option"
+              i=`expr $i + 1`
+           done
+           echo "q: Quit"
+           echo
+           read -p "? " ans
+           if [ "q" == "$ans" ]; then
+              show=""
+           else
+              show=$(echo $dafiles | gawk '{print $"'"$ans"'"}')
+           fi
+           ;;
+    esac
+
+    if [ "" != "$show" ]; then
+       echo $show
+    fi
+}
+
+# vij FooModel.java to open src/path/to/FooModel.java
+vij ()
+{
+	vim $(findj $1)
+}
+
+# simple substring find from .
+finds ()
+{
+    find -name "*$1*" | grep -v .git
+}
+
+#
+
+# need to unalias 'which' from /etc/profile.d/which2
+# before this, in .bashrc
+unalias which >/dev/null 2>&1
+
+which ()
+{
+   (alias; declare -f) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+#export -f which
+
+whichrpm ()
+{
+    rpm -qf "$(which $1)"
+}
+
+start ()
+{
+    echo systemctl restart "$1.service"
+    echo systemvtl status "$1.service"
+}
+
+# from bash-docs package
+#From: "Simon J. Gerraty" <sjg@zen.void.oz.au>
+#Message-Id: <199510091130.VAA01188@zen.void.oz.au>
+#Subject: Re: a shell idea?
+#Date: Mon, 09 Oct 1995 21:30:20 +1000
+
+
+# NAME:
+#	add_path.sh - add dir to path
+#
+# DESCRIPTION:
+#	These functions originated in /etc/profile and ksh.kshrc, but
+#	are more useful in a separate file.
+#
+# SEE ALSO:
+#	/etc/profile
+#
+# AUTHOR:
+#	Simon J. Gerraty <sjg@zen.void.oz.au>
+
+#	@(#)Copyright (c) 1991 Simon J. Gerraty
+#
+#	This file is provided in the hope that it will
+#	be of use.  There is absolutely NO WARRANTY.
+#	Permission to copy, redistribute or otherwise
+#	use this file is hereby granted provided that
+#	the above copyright notice and this notice are
+#	left intact.
+
+# is $1 missing from $2 (or PATH) ?
+no_path() {
+	eval "case :\$${2-PATH}: in *:$1:*) return 1;; *) return 0;; esac"
+}
+
+# if $1 exists and is not in path, append it
+add_path () {
+  [ -d ${1:-.} ] && no_path $* && eval ${2:-PATH}="\$${2:-PATH}:$1"
+}
+
+# if $1 exists and is not in path, prepend it
+pre_path () {
+  [ -d ${1:-.} ] && no_path $* && eval ${2:-PATH}="$1:\$${2:-PATH}"
+}
+
+# if $1 is in path, remove it
+del_path () {
+  no_path $* || eval ${2:-PATH}=`eval echo :'$'${2:-PATH}: |
+    sed -e "s;:$1:;:;g" -e "s;^:;;" -e "s;:\$;;"`
+}
+
