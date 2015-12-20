@@ -1,0 +1,31 @@
+
+GIT_PROMPT="/usr/share/git-core/contrib/completion/git-prompt.sh"
+export GIT_PROMPT
+
+# git prompt stuff
+if [ -f "${GIT_PROMPT}" ] ; then
+    source "${GIT_PROMPT}"
+    # export GIT_PS1_SHOWDIRTYSTATE=1
+    # GIT_PS1_SHOWSTASHSTATE=1
+    export GIT_PS1_SHOWUNTRACKEDFILES=1
+    export GIT_PS1_SHOWUPSTREAM="auto"
+    export GIT_PS1_SHOWUPSTREAM="verbose"
+    export GIT_PS1_SHOWCOLORHINTS=1
+    PS1+='$(__git_ps1 " (%s)")]\$ '
+else
+    PS1+='" (%s)")]\$ '
+fi
+
+VAGRANT_DEFAULT_PROVIDER=libvirt
+export VAGRANT_DEFAULT_PROVIDER
+
+# use vimx if we has a DISPLAY and it exists
+# vimx enabled X cut and paste
+if [[ -n "$DISPLAY" ]] ; then
+    if [ -e /usr/bin/vimx ] ; then
+        alias vim="/usr/bin/vimx"
+    fi
+else
+    alias vim="/usr/bin/vim"
+fi
+

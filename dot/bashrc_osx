@@ -1,0 +1,10 @@
+
+if [ -f "/usr/local/share/gitprompt.sh" ]; then
+    GIT_PROMPT_THEME=Default
+    source /usr/local/share/gitprompt.sh
+fi
+
+VAGRANT_DEFAULT_PROVIDER=virtualbox
+export VAGRANT_DEFAULT_PROVIDER
+
+export CLICOLOR=1
