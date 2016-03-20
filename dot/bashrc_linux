@@ -29,3 +29,19 @@ else
     alias vim="/usr/bin/vim"
 fi
 
+# we have a better version... Note this version doesn't
+# work on osx, where we just make do with the default.
+# make this quiet
+unalias which > /dev/null 2>&1  || :
+
+which ()
+{
+   (alias; declare -f) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+
+# simple substring find from .
+finds ()
+{
+    find -name "*$1*" | grep -v .git
+}
+

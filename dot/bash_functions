@@ -58,23 +58,12 @@ vij ()
 	vim $(findj $1)
 }
 
+#
 # simple substring find from .
 finds ()
 {
-    find -name "*$1*" | grep -v .git
+    find . -name "*$1*" | grep -v .git
 }
-
-#
-
-# need to unalias 'which' from /etc/profile.d/which2
-# before this, in .bashrc
-unalias which >/dev/null 2>&1
-
-which ()
-{
-   (alias; declare -f) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
-}
-#export -f which
 
 whichrpm ()
 {
