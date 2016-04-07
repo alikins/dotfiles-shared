@@ -7,3 +7,9 @@
 #--regex-puppet=/^site[ \t]*([a-zA-Z0-9_\-]+)[ \t]*/\1/d,definition/
 #--regex-puppet=/^node[ \t]*([a-zA-Z0-9_\-]+)[ \t]*/\1/d,definition/
 #--regex-puppet=/^define[ \t]*([:a-zA-Z0-9_\-]+)[ \t]*/\1/d,definition/
+
+# ansible/yaml ctags via http://blog.iany.me/2015/02/ctags-for-ansible/
+--langdef=ansible
+--langmap=ansible:.yml.yaml
+--regex-ansible=/^[ \t]*-[ \t]*name:[ \t]*(.+)/\1/k,tasks/
+--languages=ansible,ruby,python
