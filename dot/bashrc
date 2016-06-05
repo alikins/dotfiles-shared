@@ -77,11 +77,14 @@ if [ -f "${VIRTUALENVWRAPPER}" ] ; then
     source "${VIRTUALENVWRAPPER}"
 fi
 
+# python3 usersite
+add_path "${HOME}/Library/Python/3.5/bin"
+
 # for "gist" tool
 export GITHUB_TOKEN=$(cat ~/.github-token)
 
 # make ack look for a .ackrc in pwd
-export ACKRC=.ackrc
+#export ACKRC=.ackrc
 
 # lots of history
 export HISTTIMEFORMAT="%F %T "
@@ -100,10 +103,13 @@ alias gm="git checkout master"
 alias yesterday='history -n; history | grep $(date "+%F" --date="yesterday"); yesterday-git'
 
 # compare current env to that from when the shell started
-alias es='env|sort'
+alias es='env | sort -r'
 alias envdiff="diff -d -u --label from_login ~/.bash_envs/env_postrc_\$\$ --label now <(es)|colordiff"
 alias envstartdiff="diff -d -u --label before_dotbashrc ~/.bash_envs/env_prerc_\$\$ --label post_dotbashrc <(es)|colordiff"
 
+alias cda='cd ~/src/ansible'
+alias cdamc='cd ~/src/ansible-modules-core'
+alias cdame='cd ~/src/ansible-modules-extras'
 # we have a better version in ~/.bash_functions
 # make this quiet
 unalias which > /dev/null 2>&1  || :
