@@ -7,7 +7,16 @@ and also completing valid Python identifiers and keywords."""
 import atexit
 import logging
 import os
-import readline
+
+# On osx, the 'readline' py module uses osx's libedit instead
+# of normal (gnu) libreadline. And it's not quite compatible,
+# which shows up via obtuse failures reading readline history files.
+# Using the gnureadline from pypi (which uses regular gnu readline)
+# fixes this.
+try:
+    import gnureadline as readline
+except ImportError:
+    import readline
 import rlcompleter
 
 console_handler = logging.StreamHandler()
