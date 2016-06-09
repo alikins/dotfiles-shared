@@ -30,6 +30,11 @@ case "$OSTYPE" in
         source ~/.bashrc_linux ;;
 esac
 
+if [ -f ~/.bashrc_ansible ]; then
+    source ~/.bashrc_ansible
+fi
+
+
 # turn off flow control, aka ctrl-s/q
 # if in an interactive shell
 [[ $- == *i* ]] && stty -ixon
@@ -107,9 +112,7 @@ alias es='env | sort -r'
 alias envdiff="diff -d -u --label from_login ~/.bash_envs/env_postrc_\$\$ --label now <(es)|colordiff"
 alias envstartdiff="diff -d -u --label before_dotbashrc ~/.bash_envs/env_prerc_\$\$ --label post_dotbashrc <(es)|colordiff"
 
-alias cda='cd ~/src/ansible'
-alias cdamc='cd ~/src/ansible-modules-core'
-alias cdame='cd ~/src/ansible-modules-extras'
+
 # we have a better version in ~/.bash_functions
 # make this quiet
 unalias which > /dev/null 2>&1  || :

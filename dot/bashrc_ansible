@@ -1,0 +1,12 @@
+
+ANSIBLE_SRC_DIR="${HOME}/src/ansible"
+ANSIBLE_MODULES_CORE_SRC_DIR="${HOME}/src/ansible-modules-core"
+ANSIBLE_MODULES_EXTRAS_SRC_DIR="${HOME}/src/ansible-modules-extras"
+export ANSIBLE_SRC_DIR
+export ANSIBLE_MODULES_CORE_SRC_DIR
+export ANSIBLE_MODULES_EXTRAS_SRC_DIR
+
+alias cda='cd ${ANSIBLE_SRC_DIR}'
+alias cdamc='cd ${ANSIBLE_MODULES_CORE_SRC_DIR}'
+alias cdame='cd ${ANSIBLE_MODULES_EXTRAS_SRC_DIR}'
+alias ah='pushd ${ANSIBLE_SRC_DIR} && source hacking/env-setup && popd'
