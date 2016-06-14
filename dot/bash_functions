@@ -62,7 +62,7 @@ vij ()
 # simple substring find from .
 finds ()
 {
-    find . -name "*$1*" | grep -v .git
+    find . -name "*$1*" | grep -v '/\.git'
 }
 
 whichrpm ()
