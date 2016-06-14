@@ -7,6 +7,9 @@ if [ -f "/usr/local/share/gitprompt.sh" ]; then
     source /usr/local/share/gitprompt.sh
 fi
 
+FZF_DEFAULT_OPTS="-e --history-size=50000"
+export FZF_DEFAULT_OPTS
+
 VAGRANT_DEFAULT_PROVIDER=virtualbox
 export VAGRANT_DEFAULT_PROVIDER
 
