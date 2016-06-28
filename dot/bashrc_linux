@@ -2,7 +2,12 @@
 GIT_PROMPT="/usr/share/git-core/contrib/completion/git-prompt.sh"
 export GIT_PROMPT
 
+C_NICE_ORANGE="\[\033[38;5;166m\]"
+C_RST='\[\033[m\]'
+PS1=""
+PS1+="[${C_NICE_ORANGE}\W${C_RST}"
 # git prompt stuff
+
 if [ -f "${GIT_PROMPT}" ] ; then
     source "${GIT_PROMPT}"
     # export GIT_PS1_SHOWDIRTYSTATE=1
@@ -12,8 +17,9 @@ if [ -f "${GIT_PROMPT}" ] ; then
     export GIT_PS1_SHOWUPSTREAM="verbose"
     export GIT_PS1_SHOWCOLORHINTS=1
     PS1+='$(__git_ps1 " (%s)")]\$ '
+    #PS1='[\u@ \W$(__git_ps1 " (%s)")]\$ '
 else
-    PS1+='" (%s)")]\$ '
+    PS1+='[" (%s)")]\$ '
 fi
 
 VAGRANT_DEFAULT_PROVIDER=libvirt

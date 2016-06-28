@@ -71,7 +71,8 @@ PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 export PKG_CONFIG_PATH
 
 # python usersite
-add_path "${HOME}/Library/Python/2.7/bin"
+PYTHON_USER_SITE_BIN=$(python -c 'import site;import os; print os.path.join(site.USER_BASE, "bin")')
+add_path "${PYTHON_USER_SITE_BIN}"
 
 # module to run when python interactive
 # mode starts up
@@ -83,7 +84,8 @@ if [ -f "${VIRTUALENVWRAPPER}" ] ; then
 fi
 
 # python3 usersite
-add_path "${HOME}/Library/Python/3.5/bin"
+PYTHON3_USER_SITE_BIN=$(python3 -c 'import site;import os; print(os.path.join(site.USER_BASE, "bin"))')
+add_path "${PYTHON3_USER_SITE_BIN}"
 
 # for "gist" tool
 export GITHUB_TOKEN=$(cat ~/.github-token)
