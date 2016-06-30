@@ -19,9 +19,9 @@ if [ -f ~/.bash_functions ]; then
 	source ~/.bash_functions
 fi
 
-if [ -f ~/.bash_vagrant_functions ]; then
-    source ~/.bash_vagrant_functions
-fi
+#if [ -f ~/.bash_vagrant_functions ]; then
+#    source ~/.bash_vagrant_functions
+#fi
 
 case "$OSTYPE" in
     darwin*)
@@ -59,13 +59,14 @@ export M2_REPO
 
 GOPATH="${HOME}/gopath"
 export GOPATH
-
-LOCAL_CABAL="${HOME}/.cabal"
-
 add_path "${GOPATH}/bin"
-#rvm
-add_path "${HOME}/.rvm/bin"
-add_path "${LOCAL_CABAL}/bin/"
+
+# rvm
+# add_path "${HOME}/.rvm/bin"
+
+# cabal rpm does this itself in /etc/profile.d/cabal-install.sh
+#LOCAL_CABAL="${HOME}/.cabal"
+#add_path "${LOCAL_CABAL}/bin/"
 
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 export PKG_CONFIG_PATH
