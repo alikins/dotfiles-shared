@@ -1,11 +1,27 @@
 
+C_NICE_ORANGE="\[\033[38;5;166m\]"
+C_NICE_FOO="\[\033[36;5;166m\]"
+C_RST='\[\033[m\]'
+
+set_os_info_env ()
+{
+    _os_version_id=$(grep ^VERSION_ID= /etc/os-release)
+    _os_id=$(grep ^ID= /etc/os-release)
+    export ${_os_id//\"/}
+    export ${_os_version_id//\"/}
+
+    # prompt, user@host dir
+    OS_SLUG="${ID}-${VERSION_ID}"
+    PS1_SLUG=""
+    PS1_SLUG+="[${C_NICE_FOO}${OS_SLUG}:${C_NICE_ORANGE}\W${C_RST}"
+}
+
 GIT_PROMPT="/usr/share/git-core/contrib/completion/git-prompt.sh"
 export GIT_PROMPT
 
-C_NICE_ORANGE="\[\033[38;5;166m\]"
-C_RST='\[\033[m\]'
-PS1=""
-PS1+="[${C_NICE_ORANGE}\W${C_RST}"
+set_os_info_env
+PS1=${PS1_SLUG}
+#PS1+="[${C_NICE_ORANGE}\W${C_RST}"
 # git prompt stuff
 
 if [ -f "${GIT_PROMPT}" ] ; then
