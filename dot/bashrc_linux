@@ -1,4 +1,9 @@
 
+# we provide a ls wrapper instead of polluting env with LS_COLORS
+# set USER_LS_COLORS so /etc/profile.d/colors.sh doesn't set up LS_COLORS
+USER_LS_COLORS=
+export USER_LS_COLORS
+
 C_NICE_ORANGE="\[\033[38;5;166m\]"
 C_NICE_FOO="\[\033[36;5;166m\]"
 C_RST='\[\033[m\]'
