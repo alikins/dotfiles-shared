@@ -23,6 +23,12 @@ fi
 #    source ~/.bash_vagrant_functions
 #fi
 
+if [ -f ~/.bash_completions.d ]; then
+    source ~/.bash_completions.f/*.bas
+fi
+
+
+
 case "$OSTYPE" in
     darwin*)
         source ~/.bashrc_osx ;;
@@ -47,8 +53,20 @@ export HOSTNAME
 EDITOR='vim -f'
 export EDITOR
 
+# add ~/pythons/bin with py2.4/2.5/2.6/3.4/3.5 to path
+pre_path "${HOME}/pythons/bin"
+
+# python usersite
+PYTHON_USER_SITE_BIN=$(python -c 'import site;import os; print os.path.join(site.USER_BASE, "bin")')
+pre_path "${PYTHON_USER_SITE_BIN}"
+
+# python3 usersite
+PYTHON3_USER_SITE_BIN=$(python3 -c 'import site;import os; print(os.path.join(site.USER_BASE, "bin"))')
+add_path "${PYTHON3_USER_SITE_BIN}"
+
 # prepend ~/bin to front of path
 pre_path "${HOME}/bin"
+
 
 # Language/runtime specific stuff
 JAVA_HOME=/usr/lib/jvm/java
@@ -71,10 +89,6 @@ add_path "${GOPATH}/bin"
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 export PKG_CONFIG_PATH
 
-# python usersite
-PYTHON_USER_SITE_BIN=$(python -c 'import site;import os; print os.path.join(site.USER_BASE, "bin")')
-add_path "${PYTHON_USER_SITE_BIN}"
-
 # module to run when python interactive
 # mode starts up
 export PYTHONSTARTUP=~/.pystartup
@@ -84,9 +98,6 @@ if [ -f "${VIRTUALENVWRAPPER}" ] ; then
     source "${VIRTUALENVWRAPPER}"
 fi
 
-# python3 usersite
-PYTHON3_USER_SITE_BIN=$(python3 -c 'import site;import os; print(os.path.join(site.USER_BASE, "bin"))')
-add_path "${PYTHON3_USER_SITE_BIN}"
 
 # for "gist" tool
 export GITHUB_TOKEN=$(cat ~/.github-token)
@@ -149,3 +160,9 @@ if [ -d ~/.bash_envs ]; then
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+PATH="/home/adrian/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/adrian/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/adrian/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/adrian/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/adrian/perl5"; export PERL_MM_OPT;
