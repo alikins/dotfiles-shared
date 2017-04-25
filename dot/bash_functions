@@ -52,17 +52,110 @@ findj ()
     fi
 }
 
+finda ()
+{
+    # uses fzf https://github.com/junegunn/fzf for the ui
+    pattern="$1"
+    dafiles=$(git ls-files| grep "$pattern" | grep -v '/\.git'| grep -v '/\.tox')
+    echo "$dafiles" | fzf -m -1 -q "$pattern"
+    #echo "$dafiles" | fzf-tmux -l30 -- --no-hscroll --ansi +m -n 2 -q "$pattern"
+    # fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2
+}
+
+oldfinda ()
+{
+    dafiles=$(find . -type f -path "*$1*")
+    matches=$(echo $dafiles | gawk '{print NF}')
+
+    case "$matches" in
+        0)
+           echo "No matches found"
+           show=""
+            dafiles2=$(find . -type f -name "*$1*")
+            matches2=$(echo $dafiles2 | gawk '{print NF}')
+
+            case "$matches2" in
+                0)
+                   echo "No matches found"
+                   show=""
+                   ;;
+                1)
+                   show=$dafiles2
+                   ;;
+                *)
+                   echo
+                   echo "Multiple matches found..."
+                   i=1
+                   for option in $dafiles2
+                   do
+                      echo "$i: $option"
+                      i=`expr $i + 1`
+                   done
+                   echo "q: Quit"
+                   echo
+                   read -p "? " ans
+                   if [ "q" == "$ans" ]; then
+                      show=""
+                   else
+                      show=$(echo $dafiles2 | gawk '{print $"'"$ans"'"}')
+                   fi
+                   ;;
+            esac
+
+            if [ "" != "$show" ]; then
+               echo $show
+            fi
+           ;;
+        1)
+           show=$dafiles
+           ;;
+        *)
+           echo
+           echo "Multiple matches found..."
+           i=1
+           for option in $dafiles
+           do
+              echo "$i: $option"
+              i=`expr $i + 1`
+           done
+           echo "q: Quit"
+           echo
+           read -p "? " ans
+           if [ "q" == "$ans" ]; then
+              show=""
+           else
+              show=$(echo $dafiles | gawk '{print $"'"$ans"'"}')
+           fi
+           ;;
+    esac
+
+    if [ "" != "$show" ]; then
+       echo $show
+    fi
+}
+
+
+via ()
+{
+    vim $(finda $1)
+}
+
 # vij FooModel.java to open src/path/to/FooModel.java
 vij ()
 {
 	vim $(findj $1)
 }
 
+alog ()
+{
+   git log -p -- $(finda "${@: -1:2}")
+}
 #
 # simple substring find from .
 finds ()
 {
-    find . -name "*$1*" | grep -v '/\.git'
+    #find . -name "*$1*" | grep -v '/\.git'
+    find . -path "*$1*" | grep -v '/\.git'
 }
 
 whichrpm ()
