@@ -1,0 +1,30 @@
+
+[extensions]
+color=
+pager=
+
+[pager]
+pager = LESS='FRX' less
+
+[color]
+mode=terminfo
+
+#Custom colours
+color.orange=202
+color.lightyellow=191
+color.darkorange=220
+color.brightyellow=226
+
+#Colours for each label
+log.branch=cyan
+log.summary=lightyellow
+log.description=lightyellow
+log.bookmark=green
+log.tag=darkorange
+log.activebookmark = green bold underline
+
+changeset.public=orange bold
+changeset.secret=blue bold
+changeset.draft=brightyellow bold
+
+desc.here=bold blue_background
