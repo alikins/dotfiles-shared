@@ -23,8 +23,8 @@ fi
 #    source ~/.bash_vagrant_functions
 #fi
 
-if [ -f ~/.bash_completions.d ]; then
-    source ~/.bash_completions.f/*.bas
+if [ -d ~/.bash_completion.d ]; then
+    source ~/.bash_completion.d/*.sh
 fi
 
 
@@ -100,7 +100,7 @@ fi
 
 
 # for "gist" tool
-export GITHUB_TOKEN=$(cat ~/.github-token)
+#export GITHUB_TOKEN=$(cat ~/.github-token)
 
 # make ack look for a .ackrc in pwd
 #export ACKRC=.ackrc
