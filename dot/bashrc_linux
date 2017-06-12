@@ -15,10 +15,14 @@ set_os_info_env ()
     export ${_os_id//\"/}
     export ${_os_version_id//\"/}
 
+    if [[ "${ID}" == "fedora" ]] ; then
+        ID='F'
+        export ID
+    fi
     # prompt, user@host dir
-    OS_SLUG="${ID}-${VERSION_ID}"
+    OS_SLUG="${ID}${VERSION_ID}"
     PS1_SLUG=""
-    PS1_SLUG+="[${C_NICE_FOO}${OS_SLUG}:${C_NICE_ORANGE}\W${C_RST}"
+    PS1_SLUG+="[${C_NICE_ORANGE}\h:${C_RST}${C_NICE_FOO}${OS_SLUG}:${C_NICE_ORANGE}\W${C_RST}"
 }
 
 GIT_PROMPT="/usr/share/git-core/contrib/completion/git-prompt.sh"
