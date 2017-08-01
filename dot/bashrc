@@ -67,6 +67,8 @@ add_path "${PYTHON3_USER_SITE_BIN}"
 # prepend ~/bin to front of path
 pre_path "${HOME}/bin"
 
+OPENSHIFT_CLIENT_TOOLS="${HOME}/openshift/bin"
+add_path "${OPENSHIFT_CLIENT_TOOLS}"
 
 # Language/runtime specific stuff
 JAVA_HOME=/usr/lib/jvm/java
@@ -78,6 +80,23 @@ export M2_REPO
 GOPATH="${HOME}/gopath"
 export GOPATH
 add_path "${GOPATH}/bin"
+
+PERL_HOME="${HOME}/perl5"
+PERL_PATH="${PERL_HOME}/bin"
+add_path "${PERL_PATH}"
+
+# PATH="/home/adrian/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="${PERL_HOME}/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+export PERL5LIB
+
+PERL_LOCAL_LIB_ROOT="${PERL_HOME}/${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+export PERL_LOCAL_LIB_ROOT
+
+PERL_MB_OPT="--install_base \"/home/adrian/perl5\""
+export PERL_MB_OPT
+
+PERL_MM_OPT="INSTALL_BASE=/home/adrian/perl5"
+export PERL_MM_OPT;
 
 # rvm
 # add_path "${HOME}/.rvm/bin"
@@ -161,8 +180,3 @@ fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-PATH="/home/adrian/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/adrian/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/adrian/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/adrian/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/adrian/perl5"; export PERL_MM_OPT;
