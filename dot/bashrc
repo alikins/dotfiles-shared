@@ -2,7 +2,9 @@
 
 # Keep Track of the shell env overtime.
 if [ -d ~/.bash_envs ]; then
-    env|sort > ~/.bash_envs/env_prerc_$$
+    if [ -f ~/bin/envsort ]; then
+        envsort > ~/.bash_envs/env_prerc_$$
+    fi
 fi
 
 # Source global definitions
@@ -85,12 +87,10 @@ PERL_HOME="${HOME}/perl5"
 PERL_PATH="${PERL_HOME}/bin"
 add_path "${PERL_PATH}"
 
-# PATH="/home/adrian/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="${PERL_HOME}/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+PERL5LIB="${PERL_HOME}/lib/perl5"
 export PERL5LIB
 
-PERL_LOCAL_LIB_ROOT="${PERL_HOME}/${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
-export PERL_LOCAL_LIB_ROOT
+# PERL_LOCAL_LIB_ROOT="${PERL_HOME}/${PERL_LOCAL_LIB_ROOT"
 
 PERL_MB_OPT="--install_base \"/home/adrian/perl5\""
 export PERL_MB_OPT
@@ -117,7 +117,6 @@ if [ -f "${VIRTUALENVWRAPPER}" ] ; then
     source "${VIRTUALENVWRAPPER}"
 fi
 
-
 # for "gist" tool
 #export GITHUB_TOKEN=$(cat ~/.github-token)
 
@@ -140,10 +139,19 @@ alias tailf="tail --follow=name"
 alias gm="git checkout master"
 alias yesterday='history -n; history | grep $(date "+%F" --date="yesterday"); yesterday-git'
 
-# compare current env to that from when the shell started
-alias es='env | sort -r'
-alias envdiff="diff -d -u --label from_login ~/.bash_envs/env_postrc_\$\$ --label now <(es)|colordiff"
-alias envstartdiff="diff -d -u --label before_dotbashrc ~/.bash_envs/env_prerc_\$\$ --label post_dotbashrc <(es)|colordiff"
+# envsort is a python tool to sort the env by env var name and to preserve multiline
+# values that 'env|sort' cant.
+alias es='envsort'
+
+# we track the shell env on shell startup, so we can compare current env vars to see
+# if tools/scripts/me have altered them.
+
+# diff of current env to env immed after running ~/.bashrc
+alias envdiff="diff -d -u --label from_login ~/.bash_envs/env_postrc_\$\$ --label now <(envsort)|colordiff"
+# diff of current env to env before running .bashrc
+alias envdifftoprerc="diff -d -u --label before_dotbashrc ~/.bash_envs/env_prerc_\$\$ --label now <(envsort)|colordiff"
+# diff of before bashrc to env after bashrc  to env before running .bashrc
+alias envdifftopostrc="diff -d -u --label before_dotbashrc ~/.bash_envs/env_prerc_\$\$ --label after_dotbashrc ~/.bash_envs/env_postrc_\$\$|colordiff"
 
 
 # we have a better version in ~/.bash_functions
@@ -175,7 +183,9 @@ fi
 
 # env snapshot after startup
 if [ -d ~/.bash_envs ]; then
-    env|sort > ~/.bash_envs/env_postrc_$$
+    if [ -f ~/bin/envsort ]; then
+        envsort > ~/.bash_envs/env_postrc_$$
+    fi
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
