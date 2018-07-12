@@ -3,8 +3,10 @@
 # Keep Track of the shell env overtime.
 if [ -d ~/.bash_envs ]; then
     if [ -f ~/bin/envsort ]; then
-        envsort > ~/.bash_envs/env_prerc_$$
+        ~/bin/envsort > ~/.bash_envs/env_prerc_$$
     fi
+    set > ~/.bash_envs/env_set_prerc_$$
+    complete > ~/.bash_envs/bash_complete_prerc_$$
 fi
 
 # Source global definitions
@@ -25,8 +27,12 @@ fi
 #    source ~/.bash_vagrant_functions
 #fi
 
-if [ -d ~/.bash_completion.d ]; then
-    source ~/.bash_completion.d/*.sh
+#if [ -d ~/.bash_completion.d ]; then
+#    source ~/.bash_completion.d/*.sh
+#fi
+
+if [ -f ~/.local/bin/aws_completer ]; then
+    complete -C '~/.local/bin/aws_completer' aws
 fi
 
 
@@ -40,6 +46,10 @@ esac
 
 if [ -f ~/.bashrc_ansible ]; then
     source ~/.bashrc_ansible
+fi
+
+if [ -f ~/.bashrc_galaxy ]; then
+    source ~/.bashrc_galaxy
 fi
 
 
@@ -82,6 +92,10 @@ export M2_REPO
 GOPATH="${HOME}/gopath"
 export GOPATH
 add_path "${GOPATH}/bin"
+
+MINISHIFT_PATH="${HOME}/minishift"
+export MINISHIFT_PATH
+add_path "${MINISHIFT_PATH}/bin"
 
 PERL_HOME="${HOME}/perl5"
 PERL_PATH="${PERL_HOME}/bin"
@@ -138,7 +152,9 @@ alias eclipse-open="eclipse --launcher.openFile"
 alias tailf="tail --follow=name"
 alias gm="git checkout master"
 alias yesterday='history -n; history | grep $(date "+%F" --date="yesterday"); yesterday-git'
-
+alias jsonformat='jq .'
+alias json_format='jq .'
+alias jpp='jq .'
 # envsort is a python tool to sort the env by env var name and to preserve multiline
 # values that 'env|sort' cant.
 alias es='envsort'
@@ -186,6 +202,8 @@ if [ -d ~/.bash_envs ]; then
     if [ -f ~/bin/envsort ]; then
         envsort > ~/.bash_envs/env_postrc_$$
     fi
+    set > ~/.bash_envs/env_set_postrc_$$
+    complete > ~/.bash_envs/bash_complete_postrc_$$
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
