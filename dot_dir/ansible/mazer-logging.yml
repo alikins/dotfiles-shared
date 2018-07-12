@@ -1,0 +1,93 @@
+---
+disable_existing_loggers: false
+filters: {}
+formatters:
+  console_plain:
+    format: '%(message)s'
+  file_verbose:
+    format: '[%(asctime)s %(process)05d %(levelname)-0.1s] %(name)s %(funcName)s:%(lineno)d - %(message)s'
+  color_verbose:
+    (): color_debug.color_debug.ColorFormatter
+    format: '[%(asctime)s %(process)05d %(levelname)-0.1s] %(name)s %(funcName)s:%(lineno)-3d - %(message)s'
+    # default_color_by_attr: 'module'
+    default_color_by_attr: 'name'
+    # default_color_by_attr: msg
+    auto_color: true
+    color_groups:
+      # messages logged with the same 'msg' share a color
+      #  - ['msg', ['message']]
+      #  - ['name', ['name', 'levelname']]
+      - ['process', ['processName']]
+      - ['levelname', ['levelname']]
+      - ['funcName', ['lineno']]
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: color_verbose
+    level: DEBUG
+    stream: ext://sys.stderr
+  file:
+    class: ansible_galaxy_cli.logger.setup.ExpandTildeWatchedFileHandler
+    filename: '~/.ansible/mazer.log'
+    formatter: file_verbose
+    level: DEBUG
+  color_file:
+    class: ansible_galaxy_cli.logger.setup.ExpandTildeWatchedFileHandler
+    filename: '~/.ansible/mazer-term-color.log'
+    formatter: color_verbose
+    level: DEBUG
+  http_file:
+    class: ansible_galaxy_cli.logger.setup.ExpandTildeWatchedFileHandler
+    filename: '~/.ansible/mazer-http.log'
+    formatter: file_verbose
+    level: INFO
+  color_http_file:
+    class: ansible_galaxy_cli.logger.setup.ExpandTildeWatchedFileHandler
+    filename: '~/.ansible/mazer-http-term-color.log'
+    formatter: color_verbose
+    level: DEBUG
+  stderr_verbose:
+    class: logging.StreamHandler
+    formatter: color_verbose
+    level: DEBUG
+    stream: ext://sys.stderr
+  stderr_plain:
+    class: logging.StreamHandler
+    formatter: console_plain
+    level: DEBUG
+    stream: ext://sys.stderr
+  display:
+    class: ansible_galaxy_cli.logger.setup.ExpandTildeWatchedFileHandler
+    filename: '~/.ansible/mazer-display.log'
+    formatter: console_plain
+    level: DEBUG
+loggers:
+  ansible_galaxy:
+    handlers:
+      - console
+      - file
+      - color_file
+    level: DEBUG
+  ansible_galaxy_cli:
+    handlers:
+      - console
+      - file
+      - color_file
+    level: DEBUG
+  ansible_galaxy_cli.(stderr):
+    handlers:
+      - stderr_plain
+    level: DEBUG
+    propagate: false
+  ansible_galaxy.archive.extract:
+    level: INFO
+  ansible_galaxy.rest_api.(http):
+    # level: INFO
+    propagate: false
+    # to log verbose debug level logging to http_file handler:
+    level: DEBUG
+    handlers:
+      - http_file
+      - color_http_file
+version: 1
