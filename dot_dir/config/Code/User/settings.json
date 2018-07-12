@@ -1,0 +1,35 @@
+{"editor.fontSize": 17,
+"terminal.integrated.fontSize": 16,
+"window.zoomLevel": 1,
+"telemetry.enableTelemetry": true,
+"workbench.editor.labelFormat": "medium",
+"window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
+"explorer.openEditors.visible": 20,
+"editor.renderWhitespace": "none",
+"explorer.sortOrder": "modified",
+"python.venvFolders": [
+    "envs",
+    ".pyenv",
+    ".direnv",
+    "venvs"
+],
+"editor.lineNumbers": "off",
+"workbench.statusBar.feedback.visible": false,
+"files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/*.pyc": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true
+},
+"gitlens.keymap": "chorded",
+"gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true
+},
+"gitlens.gitExplorer.files.layout": "auto",
+"[typescript]": {},
+
+}
