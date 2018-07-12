@@ -1,0 +1,4 @@
+
+GALAXY_VENV=galaxy-py27
+
+source "${HOME}/venvs/${GALAXY_VENV}/bin/activate"
