@@ -69,7 +69,7 @@ export EDITOR
 pre_path "${HOME}/pythons/bin"
 
 # python usersite
-PYTHON_USER_SITE_BIN=$(python -c 'import site;import os; print os.path.join(site.USER_BASE, "bin")')
+PYTHON_USER_SITE_BIN=$(python -c 'import site;import os; print(os.path.join(site.USER_BASE, "bin"))')
 pre_path "${PYTHON_USER_SITE_BIN}"
 
 # python3 usersite
@@ -144,6 +144,12 @@ export HISTFILESIZE=500000
 
 # append history instead of overwriting
 shopt -s histappend
+# show result of history sub (either after a return or 'magic space'
+# based on http://www.catonmat.net/blog/the-definitive-guide-to-bash-command-line-history/
+shopt -s histverify
+
+# save the history every prompt
+export PROMPT_COMMAND="history -a;"
 
 alias grep="grep --color=auto"
 alias nosetest="nosetests"
@@ -169,6 +175,12 @@ alias envdifftoprerc="diff -d -u --label before_dotbashrc ~/.bash_envs/env_prerc
 # diff of before bashrc to env after bashrc  to env before running .bashrc
 alias envdifftopostrc="diff -d -u --label before_dotbashrc ~/.bash_envs/env_prerc_\$\$ --label after_dotbashrc ~/.bash_envs/env_postrc_\$\$|colordiff"
 
+alias venv_mazer='source ~/venvs/mazer/bin/activate'
+alias venv_mazerpy2='source ~/venvs/galaxy-cli-py27/bin/activate'
+alias venv_ans='source ~/venvs/ansible-py36/bin/activate'
+alias venv_anspy3='source ~/venvs/ansible-py3/bin/activate'
+alias venv_galaxy='source ~/venvs/galaxy-py27/bin/activate'
+alias venv_galaxypy36='source ~/venvs/galaxy-py36/bin/activate'
 
 # we have a better version in ~/.bash_functions
 # make this quiet
@@ -188,8 +200,6 @@ fi
 
 #export PS1
 
-# save the history every prompt
-#export PROMPT_COMMAND="history -a;"
 
 # make 256 color term stuff work
 if [ "$TERM" == "xterm" ]; then
