@@ -1,4 +1,6 @@
 
-GALAXY_VENV=galaxy-py27
+DEFAULT_GALAXY_VENV=galaxy-py27
 
-source "${HOME}/venvs/${GALAXY_VENV}/bin/activate"
+#if [ -n "${VIRTUAL_ENV}" ] ; then
+#    source "${HOME}/venvs/${DEFAULT_GALAXY_VENV}/bin/activate"
+#fi
