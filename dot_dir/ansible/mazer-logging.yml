@@ -8,7 +8,8 @@ formatters:
     format: '[%(asctime)s %(process)05d %(levelname)-0.1s] %(name)s %(funcName)s:%(lineno)d - %(message)s'
   color_verbose:
     (): color_debug.color_debug.ColorFormatter
-    format: '[%(asctime)s %(process)05d %(levelname)-0.1s] %(name)s %(funcName)s:%(lineno)-3d - %(message)s'
+    format: '[%(asctime)s,%(msecs)03d %(process)05d %(levelname)-0.1s] %(name)40s %(funcName)20s:%(lineno)-3d - %(message)s'
+    datefmt: '%H:%M:%S'
     # default_color_by_attr: 'module'
     default_color_by_attr: 'name'
     # default_color_by_attr: msg
@@ -25,7 +26,8 @@ handlers:
   console:
     class: logging.StreamHandler
     formatter: color_verbose
-    level: DEBUG
+    # level: DEBUG
+    level: INFO
     stream: ext://sys.stderr
   file:
     class: ansible_galaxy_cli.logger.setup.ExpandTildeWatchedFileHandler
@@ -75,13 +77,18 @@ loggers:
       - file
       - color_file
     level: DEBUG
+  ansible_galaxy.display:
+    handlers:
+      - display
+    level: DEBUG
+    propagate: false
   ansible_galaxy_cli.(stderr):
     handlers:
       - stderr_plain
     level: DEBUG
     propagate: false
   ansible_galaxy.archive.extract:
-    level: INFO
+    level: DEBUG
   ansible_galaxy.rest_api.(http):
     # level: INFO
     propagate: false
@@ -90,4 +97,15 @@ loggers:
     handlers:
       - http_file
       - color_http_file
+  ansible_galaxy.rest_api.(http).(general):
+    level: INFO
+    handlers:
+      - console
+      - file
+      - color_file
+      - http_file
+      - color_http_file
+    propagate: false
+    # to log verbose debug level logging to http_file handler:
+    # level: DEBUG
 version: 1
