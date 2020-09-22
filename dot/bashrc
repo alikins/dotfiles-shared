@@ -123,6 +123,10 @@ export PERL_MM_OPT;
 #LOCAL_CABAL="${HOME}/.cabal"
 #add_path "${LOCAL_CABAL}/bin/"
 
+# npm installing 'globally' to home dir
+# 'prefix' ~/node in ~/.npmrc
+add_path "${HOME}/node/bin"
+
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 export PKG_CONFIG_PATH
 
