@@ -5,7 +5,10 @@ USER_LS_COLORS=
 export USER_LS_COLORS
 
 C_NICE_ORANGE="\[\033[38;5;166m\]"
-C_NICE_FOO="\[\033[36;5;166m\]"
+# C_NICE_ORANGE="\[\033[38;166m\]"
+#C_NICE_ORANGE="\[\033[38;208m\]"
+#C_NICE_FOO="\[\033[36;5;166m\]"
+C_NICE_FOO="\[\033[36;166m\]"
 C_RST='\[\033[m\]'
 
 set_os_info_env ()
