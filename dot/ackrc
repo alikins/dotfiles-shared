@@ -1,3 +1,20 @@
-#--known-types
+--known-types
 --nohtml
 --noxml
+--nojson
+
+# Misc python detritus
+# --ignore-directory=is:.git
+--ignore-file=match:\.coverage
+
+# dirs
+--ignore-dir=is:.pytest_cache
+--ignore-dir=is:junk
+--ignore-dir=is:htmlcov
+--ignore-dir=is:.cache
+--ignore-dir=match:\.tox
+--ignore-dir=is:venv
+--ignore-dir=is:.venv
+
+# python build/eff
+--ignore-dir=match:.*.egg-info
