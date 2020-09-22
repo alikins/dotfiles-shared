@@ -37,7 +37,9 @@ if [ -f ~/.local/bin/aws_completer ]; then
     complete -C "$HOME/.local/bin/aws_completer" aws
 fi
 
-
+if [ -f ~/.bash_aliases ]; then
+    source ~/.bash_aliases
+fi
 
 case "$OSTYPE" in
     darwin*)
