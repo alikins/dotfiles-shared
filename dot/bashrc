@@ -139,6 +139,12 @@ if [ -f "${VIRTUALENVWRAPPER}" ] ; then
     source "${VIRTUALENVWRAPPER}"
 fi
 
+# Use system ca-bundle for requests, as used by
+# 'http' cli tool
+export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-bundle.crt
+
+export GITHUB_NICK=alikins
+
 # for "gist" tool
 #export GITHUB_TOKEN=$(cat ~/.github-token)
 
