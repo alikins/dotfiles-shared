@@ -27,12 +27,14 @@ fi
 #    source ~/.bash_vagrant_functions
 #fi
 
-#if [ -d ~/.bash_completion.d ]; then
-#    source ~/.bash_completion.d/*.sh
-#fi
+if [ -d ~/.bash_completion.d ]; then
+    # shellcheck source=/home/adrian/.bash_completion.d/all.sh
+    source ~/.bash_completion.d/all.sh
+fi
 
 if [ -f ~/.local/bin/aws_completer ]; then
-    complete -C '~/.local/bin/aws_completer' aws
+    # shellcheck source=/home/adrian/.local/bin/aws_completer
+    complete -C "$HOME/.local/bin/aws_completer" aws
 fi
 
 
