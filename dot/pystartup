@@ -8,6 +8,10 @@ import atexit
 import logging
 import os
 
+import pprint
+pp = pprint.pprint
+pf = pprint.pformat
+
 # On osx, the 'readline' py module uses osx's libedit instead
 # of normal (gnu) libreadline. And it's not quite compatible,
 # which shows up via obtuse failures reading readline history files.
@@ -22,6 +26,11 @@ import rlcompleter
 console_handler = logging.StreamHandler()
 formatter = logging.Formatter("%(asctime)s - %(levelname)s: %(message)s")
 console_handler.setFormatter(formatter)
+root_log = logging.getLogger('')
+root_log.addHandler(console_handler)
+ROOT_LOG_LEVEL = logging.ERROR
+root_log.setLevel(ROOT_LOG_LEVEL)
+
 log = logging.getLogger('repl')
 log.addHandler(console_handler)
 log.setLevel(logging.DEBUG)
