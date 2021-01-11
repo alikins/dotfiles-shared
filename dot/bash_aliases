@@ -1,3 +1,4 @@
 alias json2yaml="python -c 'import sys, yaml, json; j=json.load(sys.stdin);yaml.safe_dump(j,stream=sys.stdout,default_flow_style=False)'"
 alias yaml2json="python -c 'import sys, yaml, json; y=yaml.load(sys.stdin); json.dump(y,sys.stdout,indent=4)'"
 alias galaxydev="source ~/src/galaxy-dev/.venv/bin/activate"
+alias pki='pki -v -C /home/rdu/batkisso/.pki.password -U "https://ca.corp.redhat.com:8443/ca"'
