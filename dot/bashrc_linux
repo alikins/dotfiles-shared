@@ -79,3 +79,4 @@ finds ()
     find -name "*$1*" | grep -v .git
 }
 
+# eval "$(_PULP_COMPLETE=source_bash pulp)"
