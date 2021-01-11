@@ -1,41 +1,64 @@
-{"editor.fontSize": 16,
-"terminal.integrated.fontSize": 16,
-"window.zoomLevel": 2.5,
-"telemetry.enableTelemetry": true,
-"workbench.editor.labelFormat": "medium",
-"window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
-"explorer.openEditors.visible": 20,
-"editor.renderWhitespace": "none",
-"explorer.sortOrder": "modified",
-"python.venvFolders": [
-    "envs",
-    ".pyenv",
-    ".direnv",
-    "venvs"
-],
-"editor.lineNumbers": "off",
-"workbench.statusBar.feedback.visible": false,
-"files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/*.pyc": true,
-    "**/__pycache__": true,
-    "**/.pytest_cache": true
-},
-"gitlens.keymap": "chorded",
-"gitlens.advanced.messages": {
-    "suppressShowKeyBindingsNotice": true
-},
-"gitlens.gitExplorer.files.layout": "auto",
-"[typescript]": {
-        
+{
+    "editor.fontSize": 16,
+    "terminal.integrated.fontSize": 16,
+    "window.zoomLevel": 3,
+    "telemetry.enableTelemetry": true,
+    "workbench.editor.labelFormat": "medium",
+    "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
+    "explorer.openEditors.visible": 20,
+    "editor.renderWhitespace": "none",
+    "explorer.sortOrder": "modified",
+    "python.venvFolders": [
+        "envs",
+        ".pyenv",
+        ".direnv",
+        "venvs"
+    ],
+    "editor.lineNumbers": "off",
+    "workbench.statusBar.feedback.visible": false,
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.DS_Store": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.pytest_cache": true,
+        "**/.svn": true,
+        "**/*.pyc": true,
+        "**/CVS": true,
+        "**/tags": true
     },
-    "editor.minimap.enabled": false,
+    "gitlens.keymap": "chorded",
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "[typescript]": {},
+    "editor.minimap.enabled": true,
     "gitlens.views.repositories.files.layout": "auto",
-    "coverage-gutters.showLineCoverage": true,
-    "coverage-gutters.showGutterCoverage": false,
-
+    "[python]": {},
+    "yaml.schemas": {
+        "openapi": "openapi.yaml"
+    },
+    "gitlens.mode.active": "review",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.jediEnabled": false,
+    "vs-kubernetes": {
+        "vs-kubernetes.minikube-path.linux": "/home/adrian/.vs-kubernetes/tools/minikube/linux-amd64/minikube",
+        "vs-kubernetes.draft-path.linux": "/home/adrian/.vs-kubernetes/tools/draft/linux-amd64/draft",
+        "vs-kubernetes.helm-path.linux": "/home/adrian/.vs-kubernetes/tools/helm/linux-amd64/helm"
+    },
+    "openapi.securityAuditToken": "CiBotc2f6THr6zETVxcHNhXFZw7BGmuXe2BGKJt5CBLnJhIYZhuj6+bNIEJTPyZKm07ro6ygytt9o6pSGnyGHq8/ap9ZGZ2lnNO9XU0QyDc//jruiWwC/rvLbBJB0NUnaR/J3DyFatOzuXWRnnxoX12ZVyaDA4xlAfF3bpC8QiKkk12fn6DqyzuU+6lSufz8VcdHhZonlHRFcqQo7JOEiYZqpi+A3ktonMegd5wJimJvcxE/tfAvyZNg",
+    "workbench.sideBar.location": "left",
+    "breadcrumbs.enabled": true,
+    "githubPullRequests.remotes": [
+        "origin",
+        "upstream",
+        "alikins"
+    ],
+    "python.languageServer": "Pylance",
+    "python.experiments.optInto": [
+        "DebugAdapterFactory - experiment",
+        "PtvsdWheels37 - experiment"
+    ],
+    "jupyter.sendSelectionToInteractiveWindow": false,
 }
