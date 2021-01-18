@@ -139,6 +139,13 @@ if [ -f "${VIRTUALENVWRAPPER}" ] ; then
     source "${VIRTUALENVWRAPPER}"
 fi
 
+# pipx https://github.com/pipxproject/pipx
+# env vars to install to ~/venvs/ and link scripts
+# to ~/bin
+export PIPX_HOME="${HOME}"
+export PIPX_BIN_DIR="${HOME}/bin"
+
+
 # Use system ca-bundle for requests, as used by
 # 'http' cli tool
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-bundle.crt
