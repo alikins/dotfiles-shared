@@ -79,4 +79,7 @@ finds ()
     find -name "*$1*" | grep -v .git
 }
 
+# completions for pipx
+eval "$(register-python-argcomplete pipx)"
+
 # eval "$(_PULP_COMPLETE=source_bash pulp)"

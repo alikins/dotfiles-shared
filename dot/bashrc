@@ -69,6 +69,8 @@ export HOSTNAME
 EDITOR='vim -f'
 export EDITOR
 
+
+
 # add ~/pythons/bin with py2.4/2.5/2.6/3.4/3.5 to path
 pre_path "${HOME}/pythons/bin"
 
@@ -142,9 +144,9 @@ fi
 # pipx https://github.com/pipxproject/pipx
 # env vars to install to ~/venvs/ and link scripts
 # to ~/bin
-export PIPX_HOME="${HOME}"
-export PIPX_BIN_DIR="${HOME}/bin"
-
+export PIPX_HOME="${HOME}/pipx"
+export PIPX_BIN_DIR="${PIPX_HOME}/bin"
+pre_path "${PIPX_BIN_DIR}"
 
 # Use system ca-bundle for requests, as used by
 # 'http' cli tool
