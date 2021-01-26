@@ -61,4 +61,5 @@
         "PtvsdWheels37 - experiment"
     ],
     "jupyter.sendSelectionToInteractiveWindow": false,
+    "problems.showCurrentInStatus": true,
 }
