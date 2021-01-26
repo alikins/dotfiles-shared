@@ -70,18 +70,6 @@ EDITOR='vim -f'
 export EDITOR
 
 
-
-# add ~/pythons/bin with py2.4/2.5/2.6/3.4/3.5 to path
-pre_path "${HOME}/pythons/bin"
-
-# python usersite
-PYTHON_USER_SITE_BIN=$(python -c 'import site;import os; print(os.path.join(site.USER_BASE, "bin"))')
-pre_path "${PYTHON_USER_SITE_BIN}"
-
-# python3 usersite
-PYTHON3_USER_SITE_BIN=$(python3 -c 'import site;import os; print(os.path.join(site.USER_BASE, "bin"))')
-add_path "${PYTHON3_USER_SITE_BIN}"
-
 # prepend ~/bin to front of path
 pre_path "${HOME}/bin"
 
@@ -135,11 +123,6 @@ export PKG_CONFIG_PATH
 # module to run when python interactive
 # mode starts up
 export PYTHONSTARTUP=~/.pystartup
-
-VIRTUALENVWRAPPER="${HOME}/bin/virtualenvwrapper.sh"
-if [ -f "${VIRTUALENVWRAPPER}" ] ; then
-    source "${VIRTUALENVWRAPPER}"
-fi
 
 # pipx https://github.com/pipxproject/pipx
 # env vars to install to ~/venvs/ and link scripts
@@ -197,13 +180,6 @@ alias envdiff="diff -d -u --label from_login ~/.bash_envs/env_postrc_\$\$ --labe
 alias envdifftoprerc="diff -d -u --label before_dotbashrc ~/.bash_envs/env_prerc_\$\$ --label now <(envsort)|colordiff"
 # diff of before bashrc to env after bashrc  to env before running .bashrc
 alias envdifftopostrc="diff -d -u --label before_dotbashrc ~/.bash_envs/env_prerc_\$\$ --label after_dotbashrc ~/.bash_envs/env_postrc_\$\$|colordiff"
-
-alias venv_mazer='source ~/venvs/mazer/bin/activate'
-alias venv_mazerpy2='source ~/venvs/galaxy-cli-py27/bin/activate'
-alias venv_ans='source ~/venvs/ansible-py36/bin/activate'
-alias venv_anspy3='source ~/venvs/ansible-py3/bin/activate'
-alias venv_galaxy='source ~/venvs/galaxy-py27/bin/activate'
-alias venv_galaxypy36='source ~/venvs/galaxy-py36/bin/activate'
 
 # we have a better version in ~/.bash_functions
 # make this quiet
