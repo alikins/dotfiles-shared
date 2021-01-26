@@ -1,19 +1,19 @@
-# fbr - checkout git branch
-fbr() {
-  local branches branch
-  branches=$(git branch -vv) &&
-  branch=$(echo "$branches" | fzf +m) &&
-  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
-}
+# # fbr - checkout git branch
+# fbr() {
+#   local branches branch
+#   branches=$(git branch -vv) &&
+#   branch=$(echo "$branches" | fzf +m) &&
+#   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+# }
 
 # fbr - checkout git branch (including remote branches)
-fbr() {
-  local branches branch
-  branches=$(git branch --all | grep -v HEAD) &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
-}
+# fbr() {
+#   local branches branch
+#   branches=$(git branch --all | grep -v HEAD) &&
+#   branch=$(echo "$branches" |
+#            fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+#   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+# }
 
 # fbr - checkout git branch (including remote branches), sorted by most recent commit, limit 30 last branches
 fbr() {
@@ -91,4 +91,15 @@ fstash() {
       git stash show -p $sha
     fi
   done
+}
+
+# find matching man pages and preview
+function fman() {
+    man -k . | fzf -q "$1" --prompt='man> '  --preview $'echo {} | tr -d \'()\' | awk \'{printf "%s ", $2} {print $1}\' | xargs -r man' | tr -d '()' | awk '{printf "%s ", $2} {print $1}' | xargs -r man
+}
+
+
+# find matching pydoc and preview
+function fpydoc() {
+    python -m pydoc -k "$1" | fzf -q "$1" --prompt='pydoc> '  --preview "python -mpydoc {1}"
 }
