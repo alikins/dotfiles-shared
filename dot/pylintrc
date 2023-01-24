@@ -20,7 +20,7 @@ persistent=no
 
 # List of plugins (as comma separated values of python modules names) to load,
 # usually to register additional checkers.
-load-plugins=
+load-plugins=pylint.extensions.emptystring,pylint.extensions.confusing_elif,pylint.extensions.comparetozero,pylint.extensions.overlapping_exceptions
 
 # Use multiple processes to speed up Pylint.
 jobs=1
@@ -68,7 +68,7 @@ confidence=
 # ansible ish
 #disable=missing-docstring,line-too-long,invalid-name,fixme,pointless-statement,too-many-arguments,too-many-branches
 # too-many-too-many-warnings
-disable=too-few-public-methods,useless-object-inheritance,missing-docstring,line-too-long,invalid-name,fixme,pointless-statement,too-many-arguments,too-many-branches,too-many-variables,too-many-locals,protected-access,too-many-nested-blocks,too-many-statements,too-many-lines,too-many-instance-attributes,too-many-return-statements,too-many-public-methods,bad-whitespace,bad-continuation,no-self-use,wrong-import-position
+disable=too-few-public-methods,useless-object-inheritance,missing-docstring,line-too-long,invalid-name,fixme,pointless-statement,too-many-arguments,too-many-branches,too-many-variables,too-many-locals,protected-access,too-many-nested-blocks,too-many-statements,too-many-lines,too-many-instance-attributes,too-many-return-statements,too-many-public-methods,bad-whitespace,bad-continuation,no-self-use,wrong-import-position,too-many-ancestors
 #disable=import-star-module-level,old-octal-literal,oct-method,print-statement,unpacking-in-except,parameter-unpacking,backtick,old-raise-syntax,old-ne-operator,long-suffix,dict-view-method,dict-iter-method,metaclass-assignment,next-method-called,raising-string,indexing-exception,raw_input-builtin,long-builtin,file-builtin,execfile-builtin,coerce-builtin,cmp-builtin,buffer-builtin,basestring-builtin,apply-builtin,filter-builtin-not-iterating,using-cmp-argument,useless-suppression,range-builtin-not-iterating,suppressed-message,no-absolute-import,old-division,cmp-method,reload-builtin,zip-builtin-not-iterating,intern-builtin,unichr-builtin,reduce-builtin,standarderror-builtin,unicode-builtin,xrange-builtin,coerce-method,delslice-method,getslice-method,setslice-method,input-builtin,round-builtin,hex-method,nonzero-method,map-builtin-not-iterating
 
 
