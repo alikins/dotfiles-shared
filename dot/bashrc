@@ -146,7 +146,8 @@ export GITHUB_NICK=alikins
 # lots of history
 export HISTTIMEFORMAT="%F %T "
 export HISTSIZE=300000
-export HISTFILESIZE=500000
+export HISTFILESIZE=300000
+export HISTIGNORE="&:ls:[bf]g:exit:pwd:clear:git diff:cd:cd ..:cd src:git brage:git log:git status:ls -lart:docker ps:"
 
 # append history instead of overwriting
 shopt -s histappend
