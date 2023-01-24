@@ -115,7 +115,7 @@ export PERL_MM_OPT;
 
 # npm installing 'globally' to home dir
 # 'prefix' ~/node in ~/.npmrc
-add_path "${HOME}/node/bin"
+pre_path "${HOME}/node/bin"
 
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 export PKG_CONFIG_PATH
